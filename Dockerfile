@@ -1,9 +1,9 @@
 FROM nginx:1.10.1-alpine
 
 RUN mkdir files
-ARG OO="xren"
-ENV OO ${OO}
-RUN echo ${OO} > xx
+ARG PIP_PARAM="xren"
+ENV PIP_PARAM ${PIP_PARAM}
+RUN echo ${PIP_PARAM} > files/xx
 COPY k.sh /files
 WORKDIR /files
 # RUN chmod +x k.sh

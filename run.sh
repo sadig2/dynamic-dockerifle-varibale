@@ -8,12 +8,14 @@ echo removeing all images
 docker rmi $(docker images -qa)
 
 
-param=`[[ "$(uname)" = "Darwin" ]] && echo "pip install -U --no-cache-dir" || echo "pip install -U --no-cache-dir --no-use-pep517"`
+PIP_PARAM_STR="pip install -U --no-cache-dir"
 
-echo "$param"
+PIP_PARAM=`[[ "$(uname)" = "Darwin" ]] && echo ${PIP_PARAM_STR} || echo "${PIP_PARAM_STR} --no-use-pep517"`
+
+echo "$PIP_PARAM"
 
 echo "build docker"
-docker build --build-arg OO="$param" -t hell  .
+docker build --build-arg PIP_PARAM="$PIP_PARAM" -t hell  .
 
 echo "run docker"
 
